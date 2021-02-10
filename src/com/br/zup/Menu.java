@@ -26,20 +26,47 @@ public class Menu {
         }
     }
     private void pesquisar(){
-        System.out.println(jogos);
+        for(Jogo jogo : jogos) {
+            if (jogo instanceof Rua) {
+                Rua rua = (Rua) jogo;
+                System.out.println("Nome: "+rua.getNome());
+                System.out.println("Quantidade de Jogadores: "+rua.getQuantidadeJogadores());
+                System.out.println("Horas de jogo: "+rua.getHorasDeJogo());
+                System.out.println("Perigosa: "+rua.isPerigosa());
+                System.out.println("LocalParaBrinca: "+rua.getLocalBrincar());
+                System.out.println("TipoDeJogo: "+rua.getTipoDeJogo());
+
+            }else if (jogo instanceof Tabuleiro){
+                Tabuleiro tabuleiro = (Tabuleiro) jogo;
+                System.out.println("Nome: "+tabuleiro.getNome());
+                System.out.println("Quantidade de Jogadores: "+tabuleiro.getQuantidadeJogadores());
+                System.out.println("Horas de jogo: "+tabuleiro.getHorasDeJogo());
+                System.out.println("Quantidade de peças: "+tabuleiro.getQuantidadePecas());
+                System.out.println("TipoDeJogo: "+tabuleiro.getTipoDeJogo());
+
+            }else if (jogo instanceof Videogame){
+                Videogame videogame = (Videogame) jogo;
+                System.out.println("Nome: "+videogame.getNome());
+                System.out.println("Quantidade de Jogadores: "+videogame.getQuantidadeDeJogadores());
+                System.out.println("Horas de jogo: "+videogame.getHorasDeJogo());
+                System.out.println("Online: "+videogame.isOnline());
+                System.out.println("TipoDeJogo: "+videogame.getTipoDeJogo());
+            }
+            System.out.println();
+        }
     }
 
     private void cadastrarJogo() {
         System.out.println("Qual o tipo de jogo? (Videogame, Rua ou Tabuleiro)");
-        String opcao = teclado.nextLine();
+        String opcao = teclado.next();
         if (opcao.equalsIgnoreCase("Videogame")) {
             Videogame videogame = new Videogame();
             System.out.println("Nome:");
-            videogame.setNome(teclado.nextLine());
+            videogame.setNome(teclado.next());
             System.out.println("Quantidade de jogadores:");
             videogame.setQuantidadeDeJogadores(teclado.nextInt());
             System.out.println("Horas de jogo:");
-            videogame.setHorasDeJogo(teclado.nextLine());
+            videogame.setHorasDeJogo(teclado.next());
             System.out.println("Online?");
             videogame.setOnline(teclado.nextBoolean());
             videogame.setTipoDeJogo(TipoJogo.VIDEOGAME);
@@ -48,30 +75,34 @@ public class Menu {
         } else if (opcao.equalsIgnoreCase("Rua")) {
             Rua rua = new Rua();
             System.out.println("Nome:");
-            rua.setNome(teclado.nextLine());
+            rua.setNome(teclado.next());
             System.out.println("Local para brincar (Rua, Passeio):");
 
-            if (teclado.nextLine().equalsIgnoreCase("Rua")) {
+            if (teclado.next().equalsIgnoreCase("Rua")) {
                 rua.setLocalBrincar(LocalJogo.RUA);
 
-            } else if (teclado.nextLine().equalsIgnoreCase("Passeio")) {
+            } else if (teclado.next().equalsIgnoreCase("Passeio")) {
                 rua.setLocalBrincar(LocalJogo.PASSEIO);
             }
                 System.out.println("Horas de jogo:");
-                rua.setHorasDeJogo(teclado.nextLine());
+                rua.setHorasDeJogo(teclado.next());
+            System.out.println("Perigosa:");
+            rua.setPerigosa(teclado.nextBoolean());
+            System.out.println("Quantidade de jogadores:");
+            rua.setQuantidadeJogadores(teclado.nextInt());
                 rua.setTipoDeJogo(TipoJogo.RUA);
                 jogos.add(rua);
 
             } else if (opcao.equalsIgnoreCase("Tabuleiro")) {
             Tabuleiro tabuleiro = new Tabuleiro();
             System.out.println("Nome:");
-            tabuleiro.setNome(teclado.nextLine());
+            tabuleiro.setNome(teclado.next());
             System.out.println("Quantidade de peças:");
             tabuleiro.setQuantidadePecas(teclado.nextInt());
             System.out.println("Quantidade de jogadores:");
             tabuleiro.setQuantidadeJogadores(teclado.nextInt());
             System.out.println("Horas de jogo:");
-            tabuleiro.setHorasDeJogo(teclado.nextLine());
+            tabuleiro.setHorasDeJogo(teclado.next());
             tabuleiro.setTipoDeJogo(TipoJogo.TABULEIRO);
             jogos.add(tabuleiro);
 
